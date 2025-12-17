@@ -1,0 +1,86 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card p-5">
+                <h1 class="text-center mb-4">Бронирование {{ vehicle.name }}</h1>
+                
+             
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5>Информация об автомобиле</h5>
+                        <p><strong>Название:</strong> {{ vehicle.name }}</p>
+                        <p><strong>Тип:</strong> {{ vehicle.get_vehicle_type_display }}</p>
+                        <p><strong>Вместимость:</strong> {{ vehicle.capacity }} человек</p>
+                        <p><strong>Цена:</strong> {{ vehicle.price_per_hour }} $/час</p>
+                    </div>
+                </div>
+                
+              
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label for="start_date" class="form-label">Дата начала</label>
+                            <input type="date" class="form-control" id="start_date" name="start_date" 
+                                   value="{{ default_start }}" required min="{{ default_start }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="end_date" class="form-label">Дата окончания</label>
+                            <input type="date" class="form-control" id="end_date" name="end_date" 
+                                   value="{{ default_end }}" required min="{{ default_end }}">
+                        </div>
+                    </div>
+                    
+                   
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5>Расчет стоимости</h5>
+                            <p>Цена за час: <strong>{{ vehicle.price_per_hour }} $</strong></p>
+                            <p id="cost_calculation">Выберите даты для расчета стоимости</p>
+                            <button type="button" class="btn btn-outline-primary" onclick="calculateCost()">
+                                Рассчитать стоимость
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">Подтвердить бронирование</button>
+                        <a href="{% url 'vehicle_detail' vehicle.id %}" class="btn btn-outline-secondary">Назад</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function calculateCost() {
+    const startDate = new Date(document.getElementById('start_date').value);
+    const endDate = new Date(document.getElementById('end_date').value);
+    const pricePerHour = {{ vehicle.price_per_hour }};
+    
+    if (!startDate || !endDate) {
+        alert('Пожалуйста, выберите даты');
+        return;
+    }
+    
+    if (endDate <= startDate) {
+        alert('Дата окончания должна быть позже даты начала');
+        return;
+    }
+    
+   
+    const hours = (endDate - startDate) / (1000 * 60 * 60);
+    const totalCost = hours * pricePerHour;
+    
+    document.getElementById('cost_calculation').innerHTML = 
+        `Период: ${hours.toFixed(1)} часов<br>` +
+        `Общая стоимость: <strong>${totalCost.toFixed(2)} $</strong>`;
+}
+</script>
+{% endblock %}

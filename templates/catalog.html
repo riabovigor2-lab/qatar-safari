@@ -1,0 +1,341 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="hero-section" style="
+    background: linear-gradient(rgba(218, 209, 189, 0.4), rgba(218, 209, 189, 0.5)), 
+                url('{% static 'images/image 4.png' %}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 140px 0;
+    margin: -1rem -15px 0 -15px;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    position: relative;
+">
+    
+    <div style="
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2));
+        z-index: 1;
+    "></div>
+    
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h1 class="display-3 fw-bold mb-4" style="
+                    color: #ffffffff; 
+                    text-shadow: 2px 2px 4px rgba(255,255,255,0.7);
+                    font-size: 3rem;
+                ">
+                    Выберите ваш внедорожник
+                </h1>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        
+        <div class="col-md-6 mb-4">
+            <div class="card border-0 shadow-lg position-relative" style="
+                border-radius: 15px;
+                overflow: hidden;
+                transition: transform 0.3s ease;
+                height: 100%;
+                background: white;
+            ">
+               
+                <div style="
+                    height: 220px;
+                    background: url('{% static 'images/image 6.png' %}') center/cover no-repeat;
+                    position: relative;
+                ">
+                    <div style="
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.15));
+                    "></div>
+                </div>
+                
+                
+                <div class="card-body p-4 d-flex flex-column">
+                   
+                    <h3 class="text-center mb-3" style="
+                        color: #333;
+                        font-size: 1.6rem;
+                        font-weight: bold;
+                    ">
+                        Nissan Patrol Y62
+                    </h3>
+                    
+                
+                    <div class="text-center mb-4">
+                        <div style="
+                            background-color: #f8f9fa;
+                            border-radius: 50px;
+                            padding: 8px 25px;
+                            display: inline-block;
+                            border: 1px solid #e9ecef;
+                        ">
+                            <span style="
+                                font-size: 1.1rem;
+                                color: #555;
+                                font-weight: 500;
+                            ">
+                                5 мест
+                            </span>
+                        </div>
+                    </div>
+                    
+                  
+                    <div class="mt-auto text-center">
+                        <a href="{% url 'vehicle_detail' 1 %}" class="btn btn-primary btn-lg px-5 py-3" style="
+                            font-size: 1.1rem;
+                            font-weight: bold;
+                            border-radius: 50px;
+                            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+                            min-width: 220px;
+                        ">
+                            рассчитать стоимость
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="col-md-6 mb-4">
+            <div class="card border-0 shadow-lg position-relative" style="
+                border-radius: 15px;
+                overflow: hidden;
+                transition: transform 0.3s ease;
+                height: 100%;
+                background: white;
+            ">
+              
+                <div style="
+                    height: 220px;
+                    background: url('{% static 'images/image 8.png' %}') center/cover no-repeat;
+                    position: relative;
+                ">
+                    <div style="
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: linear-gradient(to bottom, rgba(0,0,0,0.05), rgba(0,0,0,0.15));
+                    "></div>
+                </div>
+                
+                
+                <div class="card-body p-4 d-flex flex-column">
+                   
+                    <h3 class="text-center mb-3" style="
+                        color: #333;
+                        font-size: 1.6rem;
+                        font-weight: bold;
+                    ">
+                        Toyota Hilux GR Sport
+                    </h3>
+                    
+                    
+                    <div class="text-center mb-4">
+                        <div style="
+                            background-color: #f8f9fa;
+                            border-radius: 50px;
+                            padding: 8px 25px;
+                            display: inline-block;
+                            border: 1px solid #e9ecef;
+                        ">
+                            <span style="
+                                font-size: 1.1rem;
+                                color: #555;
+                                font-weight: 500;
+                            ">
+                                5 мест
+                            </span>
+                        </div>
+                    </div>
+                    
+                  
+                    <div class="mt-auto text-center">
+                        <a href="{% url 'vehicle_detail' 2 %}" class="btn btn-primary btn-lg px-5 py-3" style="
+                            font-size: 1.1rem;
+                            font-weight: bold;
+                            border-radius: 50px;
+                            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+                            min-width: 220px;
+                        ">
+                            рассчитать стоимость
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+            url('{% static 'images/image 4.png' %}') center/cover no-repeat;
+        filter: brightness(1.1) contrast(1.1);
+        z-index: 0;
+    }
+    
+    .hero-section > .container {
+        position: relative;
+        z-index: 2;
+    }
+    
+   
+    .card {
+        transition: all 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.15) !important;
+    }
+    
+  
+    .hero-section h1 {
+        animation: fadeInDown 1s ease-out;
+    }
+    
+    .hero-section p.lead {
+        animation: fadeInUp 1s ease-out 0.3s both;
+    }
+    
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+   
+    .card-body {
+        min-height: 180px;
+    }
+    
+   
+    @media (max-width: 992px) {
+        .col-md-6 {
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .hero-section {
+            padding: 80px 0;
+            min-height: 400px;
+        }
+        
+        .hero-section h1 {
+            font-size: 2.2rem !important;
+        }
+        
+        .hero-section p.lead {
+            font-size: 1.1rem !important;
+            padding: 15px;
+        }
+        
+        .card div[style*="background: url"] {
+            height: 200px !important;
+        }
+        
+        .card-body {
+            padding: 1.5rem !important;
+        }
+        
+        .card-body h3 {
+            font-size: 1.4rem !important;
+        }
+        
+        .card-body .btn-lg {
+            padding: 12px 30px !important;
+            font-size: 1rem !important;
+            min-width: 200px !important;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .hero-section {
+            padding: 60px 0;
+            min-height: 350px;
+        }
+        
+        .hero-section h1 {
+            font-size: 1.8rem !important;
+        }
+        
+        .hero-section p.lead {
+            font-size: 1rem !important;
+            padding: 12px;
+        }
+        
+        .card {
+            border-radius: 12px !important;
+        }
+        
+        .card div[style*="background: url"] {
+            height: 180px !important;
+        }
+        
+        .card-body h3 {
+            font-size: 1.3rem !important;
+        }
+        
+        .card-body .btn-lg {
+            padding: 10px 25px !important;
+            font-size: 0.95rem !important;
+            min-width: 180px !important;
+        }
+    }
+</style>
+
+
+
+{% endblock %}

@@ -1,0 +1,44 @@
+[
+  {
+    "model": "main.vehicle",
+    "pk": 1,
+    "fields": {
+      "name": "Nissan Patrol Y62",
+      "description": "Мощный внедорожник для сафари по дюнам",
+      "vehicle_type": "SUV",
+      "year": 2023,
+      "capacity": 5,
+      "price_per_hour": 30.00,
+      "rating": 4.8,
+      "is_available": true
+    }
+  },
+  {
+    "model": "main.vehicle",
+    "pk": 2,
+    "fields": {
+      "name": "Toyota Hilux GR Sport",
+      "description": "Надежный пикап для экстремальных условий",
+      "vehicle_type": "PICKUP",
+      "year": 2023,
+      "capacity": 5,
+      "price_per_hour": 30.00,
+      "rating": 4.6,
+      "is_available": true
+    }
+  },
+  {
+    "model": "main.vehicle",
+    "pk": 3,
+    "fields": {
+      "name": "Land Rover Defender",
+      "description": "Легендарный внедорожник для любых приключений",
+      "vehicle_type": "SUV",
+      "year": 2024,
+      "capacity": 7,
+      "price_per_hour": 45.00,
+      "rating": 4.9,
+      "is_available": true
+    }
+  }
+]

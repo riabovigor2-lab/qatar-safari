@@ -1,0 +1,45 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-5">Наши автомобили</h1>
+    
+
+    <div class="row justify-content-center">
+        {% for vehicle in vehicles %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <h4 class="card-title">{{ vehicle.name }}</h4>
+                    <div class="mb-3">
+                        {% for i in "12345" %}
+                            {% if forloop.counter <= vehicle.rating|floatformat:0|add:"0" %}
+                                ★
+                            {% else %}
+                                ☆
+                            {% endif %}
+                        {% endfor %}
+                        <span class="ms-1">{{ vehicle.rating }}</span>
+                    </div>
+                    
+                    <p class="card-text">
+                        <strong>Тип:</strong> {{ vehicle.get_vehicle_type_display }}<br>
+                        <strong>Год:</strong> {{ vehicle.year }}<br>
+                        <strong>Мест:</strong> {{ vehicle.capacity }}<br>
+                        <strong>Цена:</strong> {{ vehicle.price_per_hour }} $/час
+                    </p>
+                    
+                    <div class="mt-3">
+                        <a href="{% url 'vehicle_detail' vehicle.id %}" class="btn btn-primary">Подробнее</a>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'create_booking' vehicle.id %}" class="btn btn-success">Забронировать</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

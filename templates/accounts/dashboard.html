@@ -1,0 +1,360 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="hero-section" style="
+    background: linear-gradient(rgba(218, 209, 189, 0.5), rgba(218, 209, 189, 0.6)), 
+                url('{% static 'images/image 12.png' %}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 120px 0;
+    margin: -1rem -15px 0 -15px;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    position: relative;
+">
+  
+    <div style="
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.25));
+        z-index: 1;
+    "></div>
+    
+    <div class="container position-relative" style="z-index: 2;">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h1 class="display-4 fw-bold mb-3" style="
+                    color: white; 
+                    text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+                    font-size: 2.8rem;
+                ">
+                    Добро пожаловать в личный кабинет
+                </h1>
+                <h2 class="mb-5" style="
+                    color: white;
+                    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+                    font-size: 1.8rem;
+                ">
+                    {{ user.username }}
+                </h2>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="container mt-5">
+    <div class="row">
+       
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm mb-4" style="border-radius: 15px;">
+                <div class="card-header bg-white border-0" style="border-radius: 15px 15px 0 0;">
+                    <h4 class="mb-0" style="color: #333; font-weight: 600;">
+                        <i class="bi bi-person-circle me-2"></i>Мой профиль
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <p class="mb-1"><strong>Имя пользователя:</strong></p>
+                        <p style="color: #555;">{{ user.username }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <p class="mb-1"><strong>Email:</strong></p>
+                        <p style="color: #555;">{{ user.email }}</p>
+                    </div>
+                    {% if user_profile %}
+                    <div class="mb-3">
+                        <p class="mb-1"><strong>Телефон:</strong></p>
+                        <p style="color: #555;">{{ user_profile.phone|default:"Не указан" }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <p class="mb-1"><strong>Адрес:</strong></p>
+                        <p style="color: #555;">{{ user_profile.address|default:"Не указан" }}</p>
+                    </div>
+                    {% endif %}
+                    <div class="d-grid">
+                        <a href="{% url 'profile' %}" class="btn btn-outline-primary">
+                            <i class="bi bi-pencil-square me-2"></i>Редактировать профиль
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+           
+            <div class="card border-0 shadow-sm" style="border-radius: 15px;">
+                <div class="card-header bg-white border-0" style="border-radius: 15px 15px 0 0;">
+                    <h4 class="mb-0" style="color: #333; font-weight: 600;">
+                        <i class="bi bi-bar-chart me-2"></i>Статистика
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="text-center">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="p-3" style="background-color: #f8f9fa; border-radius: 10px;">
+                                    <h3 class="mb-1" style="color: #ff6b00;">{{ total_bookings }}</h3>
+                                    <p class="mb-0 small">Всего</p>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="p-3" style="background-color: #f8f9fa; border-radius: 10px;">
+                                    <h3 class="mb-1" style="color: #28a745;">{{ active_bookings }}</h3>
+                                    <p class="mb-0 small">Активные</p>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="p-3" style="background-color: #f8f9fa; border-radius: 10px;">
+                                    <h3 class="mb-1" style="color: #6c757d;">{{ completed_bookings }}</h3>
+                                    <p class="mb-0 small">Завершенные</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+      
+        <div class="col-md-8">
+            <div class="card border-0 shadow-sm" style="border-radius: 15px;">
+                <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center" style="border-radius: 15px 15px 0 0;">
+                    <h4 class="mb-0" style="color: #333; font-weight: 600;">
+                        <i class="bi bi-calendar-check me-2"></i>Активные бронирования
+                    </h4>
+                    <a href="{% url 'catalog' %}" class="btn btn-sm btn-outline-primary">
+                        <i class="bi bi-plus-circle me-1"></i>Новое бронирование
+                    </a>
+                </div>
+                <div class="card-body">
+                    {% if bookings %}
+                        {% for booking in bookings %}
+                        <div class="card mb-3 border-0" style="
+                            background-color: #f8f9fa;
+                            border-radius: 12px;
+                            overflow: hidden;
+                        ">
+                            <div class="card-body p-4">
+                                <div class="row align-items-center">
+                                   
+                                    <div class="col-md-8">
+                                        <h5 class="mb-2" style="color: #333; font-weight: 600;">
+                                            {{ booking.vehicle.name }}
+                                        </h5>
+                                        
+                                       
+                                        <div class="mb-3">
+                                            <p class="mb-1" style="color: #555;">
+                                                <i class="bi bi-calendar-event me-2"></i>
+                                                <strong>Дата бронирования:</strong>
+                                            </p>
+                                            <div style="
+                                                background-color: white;
+                                                border-radius: 8px;
+                                                padding: 10px 15px;
+                                                display: inline-block;
+                                                border: 1px solid #e9ecef;
+                                            ">
+                                                <span style="
+                                                    font-weight: bold;
+                                                    color: #333;
+                                                    font-size: 1.1rem;
+                                                ">
+                                                    {{ booking.start_date|date:"d-m-Y" }} - {{ booking.end_date|date:"d-m-Y" }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
+                                     
+                                        <div>
+                                            <p class="mb-1" style="color: #555;">
+                                                <i class="bi bi-info-circle me-2"></i>
+                                                <strong>Статус:</strong>
+                                            </p>
+                                            {% if booking.status == 'confirmed' %}
+                                                <span class="badge bg-success py-2 px-3" style="font-size: 0.9rem;">
+                                                    <i class="bi bi-check-circle me-1"></i>Подтверждено
+                                                </span>
+                                            {% elif booking.status == 'pending' %}
+                                                <span class="badge bg-warning py-2 px-3" style="font-size: 0.9rem;">
+                                                    <i class="bi bi-clock me-1"></i>Ожидает подтверждения
+                                                </span>
+                                            {% elif booking.status == 'cancelled' %}
+                                                <span class="badge bg-danger py-2 px-3" style="font-size: 0.9rem;">
+                                                    <i class="bi bi-x-circle me-1"></i>Отменено
+                                                </span>
+                                            {% elif booking.status == 'completed' %}
+                                                <span class="badge bg-secondary py-2 px-3" style="font-size: 0.9rem;">
+                                                    <i class="bi bi-check2-all me-1"></i>Завершено
+                                                </span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    
+                                  
+                                    <div class="col-md-4 text-end">
+                                        {% if booking.status == 'pending' or booking.status == 'confirmed' %}
+                                        <form method="post" action="{% url 'cancel_booking' booking.id %}" class="d-inline">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger btn-lg px-4 py-2" 
+                                                    onclick="return confirm('Вы уверены, что хотите отменить бронирование?')"
+                                                    style="border-radius: 50px; font-weight: bold;">
+                                                Отменить
+                                            </button>
+                                        </form>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="text-center py-5">
+                            <div class="mb-4">
+                                <i class="bi bi-calendar-x" style="font-size: 4rem; color: #6c757d;"></i>
+                            </div>
+                            <h4 style="color: #555;">У вас нет активных бронирований</h4>
+                            <p class="mb-4" style="color: #777;">Начните своё приключение, выбрав автомобиль</p>
+                            <a href="{% url 'catalog' %}" class="btn btn-primary btn-lg px-5 py-3">
+                                <i class="bi bi-car-front me-2"></i>Перейти к каталогу
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            
+            <div class="card border-0 shadow-sm mt-4" style="border-radius: 15px;">
+                <div class="card-header bg-white border-0" style="border-radius: 15px 15px 0 0;">
+                    <h4 class="mb-0" style="color: #333; font-weight: 600;">
+                        <i class="bi bi-lightning me-2"></i>Быстрые действия
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <a href="{% url 'catalog' %}" class="btn btn-outline-primary w-100 py-3 d-flex flex-column align-items-center" style="border-radius: 12px;">
+                                <i class="bi bi-car-front mb-2" style="font-size: 1.5rem;"></i>
+                                <span>Забронировать авто</span>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{% url 'my_bookings' %}" class="btn btn-outline-success w-100 py-3 d-flex flex-column align-items-center" style="border-radius: 12px;">
+                                <i class="bi bi-list-check mb-2" style="font-size: 1.5rem;"></i>
+                                <span>Все бронирования</span>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{% url 'profile' %}" class="btn btn-outline-warning w-100 py-3 d-flex flex-column align-items-center" style="border-radius: 12px;">
+                                <i class="bi bi-gear mb-2" style="font-size: 1.5rem;"></i>
+                                <span>Настройки профиля</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+   
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+            url('{% static 'images/image 12.png' %}') center/cover no-repeat;
+        filter: brightness(1.1) contrast(1.1);
+        z-index: 0;
+    }
+    
+    .hero-section > .container {
+        position: relative;
+        z-index: 2;
+    }
+    
+   
+    .hero-section h1 {
+        animation: fadeInDown 1s ease-out;
+    }
+    
+    .hero-section h2 {
+        animation: fadeInUp 1s ease-out 0.3s both;
+    }
+    
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+ 
+    @media (max-width: 768px) {
+        .hero-section {
+            padding: 80px 0;
+            min-height: 250px;
+        }
+        
+        .hero-section h1 {
+            font-size: 2rem !important;
+        }
+        
+        .hero-section h2 {
+            font-size: 1.4rem !important;
+        }
+        
+        .row {
+            flex-direction: column;
+        }
+        
+        .col-md-4, .col-md-8 {
+            width: 100%;
+        }
+        
+        .col-md-8 {
+            margin-top: 20px;
+        }
+        
+        .card-body .btn-lg {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        .text-end {
+            text-align: center !important;
+            margin-top: 15px;
+        }
+    }
+</style>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+{% endblock %}

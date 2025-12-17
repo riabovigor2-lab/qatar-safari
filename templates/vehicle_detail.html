@@ -1,0 +1,68 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card p-5">
+                <h1 class="text-center mb-4">{{ vehicle.name }}</h1>
+                
+                
+                <div class="text-center mb-4">
+                    {% with stars=vehicle.rating|floatformat:0 %}
+                    {% for i in "12345" %}
+                        {% if forloop.counter <= stars|add:"0" %}
+                            ★
+                        {% else %}
+                            ☆
+                        {% endif %}
+                    {% endfor %}
+                    <span class="ms-2">{{ vehicle.rating }}</span>
+                    {% endwith %}
+                </div>
+                
+              
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Характеристики</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Тип:</strong> {{ vehicle.get_vehicle_type_display }}</p>
+                        <p><strong>Год:</strong> {{ vehicle.year }}</p>
+                        <p><strong>Вместимость:</strong> {{ vehicle.capacity }} чел.</p>
+                    </div>
+                </div>
+                
+            
+                <div class="text-center mb-4">
+                    <h2>Цена</h2>
+                    <h1 style="color: #ff6b00;">{{ vehicle.price_per_hour }} $ в час</h1>
+                </div>
+                
+               
+                <div class="text-center">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'create_booking' vehicle.id %}" class="btn btn-primary btn-lg px-5 py-3">
+                            ЗАБРОНИРОВАТЬ
+                        </a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="btn btn-primary btn-lg px-5 py-3">
+                            ВОЙТИ ДЛЯ БРОНИРОВАНИЯ
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            
+           
+            <div class="card p-4 mt-4">
+                <div class="text-center">
+                    <h5>Контактная информация</h5>
+                    <p><strong>Телефон:</strong> 89091897573</p>
+                    <p><strong>Email:</strong> safari@13.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

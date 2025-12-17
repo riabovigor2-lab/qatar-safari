@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card p-5">
+                <h1 class="text-center mb-4">РЕГЕСТРАЦИЯ</h1>
+                
+                
+                {% if messages %}
+                <div class="mb-4">
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                <form method="post">
+                    {% csrf_token %}
+                    
+             
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h5>Основная информация</h5>
+                            <div class="mb-3">
+                                <label class="form-label">Имя пользователя *</label>
+                                <input type="text" class="form-control" name="username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email *</label>
+                                <input type="email" class="form-control" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Пароль *</label>
+                                <input type="password" class="form-control" name="password1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Подтвердите пароль *</label>
+                                <input type="password" class="form-control" name="password2" required>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h5>Контактная информация</h5>
+                            <div class="mb-3">
+                                <label class="form-label">ФИО</label>
+                                <input type="text" class="form-control" name="full_name">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Телефон *</label>
+                                <input type="tel" class="form-control" name="phone" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Номер карты</label>
+                                <input type="text" class="form-control" name="card_number">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">CVC</label>
+                                <input type="password" class="form-control" name="cvc" maxlength="3">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Адрес *</label>
+                                <textarea class="form-control" name="address" rows="2" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success btn-lg py-3">
+                            Зарегистрироваться
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="text-center mt-4">
+                    <p>Уже есть аккаунт? <a href="{% url 'login' %}" class="btn btn-link">Войти</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+    
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+    
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+</style>
+{% endblock %}

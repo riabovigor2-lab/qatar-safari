@@ -1,0 +1,47 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card p-5">
+                <h1 class="text-center mb-4">ВХОД</h1>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    
+                
+                    <div class="mb-3">
+                        <label class="form-label">Имя</label>
+                        <input type="text" class="form-control" name="username" required>
+                    </div>
+                    
+                   
+                    <div class="mb-4">
+                        <label class="form-label">ПАРОЛЬ</label>
+                        <input type="password" class="form-control" name="password" required>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">Войти</button>
+                    </div>
+                </form>
+                
+                <div class="text-center mt-3">
+                    <a href="{% url 'register' %}" class="btn btn-link">регистрация</a>
+                </div>
+                
+                
+                <div class="card p-3 mt-4">
+                    <div class="text-center">
+                        <h6>Контактная информация</h6>
+                        <p class="mb-1"><small>Телефон: 89091897573</small></p>
+                        <p class="mb-0"><small>Email: safari@13.com</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
